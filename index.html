@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="tk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ykjam Terjime — türkmen dili üçin terjimeçi we gepleşik kitaby. Türkmen harplary ä ç ž ň ö ş ü ý klawiaturasyz. Açyk kod, MIT.">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<meta property="og:title" content="Ykjam Terjime">
+<meta property="og:description" content="Ykjam Terjime — türkmen dili üçin terjimeçi we gepleşik kitaby. Türkmen harplary ä ç ž ň ö ş ü ý klawiaturasyz. Açyk kod, MIT.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="icon.png">
+<meta name="theme-color" content="#2FA0D9">
+<title>Ykjam Terjime</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+:root{
+  --ink:#10222E;
+  --bg:#F2F6F8;
+  --surface:#FFFFFF;
+  --surface-2:#FAFCFD;
+  --rule:#D6E1E8;
+  --rule-soft:#E6EDF1;
+  --muted:#5D7181;
+  --brand:#2FA0D9;
+  --brand-deep:#17658C;
+  --brand-wash:rgba(47,160,217,.06);
+  --brand-edge:rgba(47,160,217,.28);
+  --on-brand:#FFFFFF;
+  --sand:#C77F2E;
+  --sand-wash:rgba(199,127,46,.10);
+  --org:#B25A0C;
+  --shadow:0 1px 2px rgba(16,34,46,.04), 0 8px 28px rgba(16,34,46,.06);
+
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Public Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#E4EDF2;
+    --bg:#0C1418;
+    --surface:#131E25;
+    --surface-2:#101A20;
+    --rule:#22333D;
+    --rule-soft:#1A272E;
+    --muted:#8299A8;
+    --brand:#55B8E8;
+    --brand-deep:#8FD3F2;
+    --brand-wash:rgba(85,184,232,.07);
+    --brand-edge:rgba(85,184,232,.30);
+    --on-brand:#0C1418;
+    --sand:#D9A063;
+    --sand-wash:rgba(217,160,99,.12);
+    --org:#FF9D4D;
+    --shadow:0 1px 2px rgba(0,0,0,.30), 0 8px 28px rgba(0,0,0,.28);
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E4EDF2;
+  --bg:#0C1418;
+  --surface:#131E25;
+  --surface-2:#101A20;
+  --rule:#22333D;
+  --rule-soft:#1A272E;
+  --muted:#8299A8;
+  --brand:#55B8E8;
+  --brand-deep:#8FD3F2;
+  --brand-wash:rgba(85,184,232,.07);
+  --brand-edge:rgba(85,184,232,.30);
+  --on-brand:#0C1418;
+  --sand:#D9A063;
+  --sand-wash:rgba(217,160,99,.12);
+  --org:#FF9D4D;
+  --shadow:0 1px 2px rgba(0,0,0,.30), 0 8px 28px rgba(0,0,0,.28);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:3px}
+
+.page{max-width:1080px;margin:0 auto;padding:0 40px 88px}
+
+/* ---------- шапка ---------- */
+.masthead{
+  display:flex;align-items:center;gap:20px;
+  padding:26px 0 22px;border-bottom:1px solid var(--rule);
+}
+.wordmark{
+  font-family:var(--display);font-size:21px;font-weight:700;
+  letter-spacing:-.025em;text-decoration:none;line-height:1;
+  display:flex;align-items:baseline;gap:.28em;
+}
+.wordmark i{font-style:normal;font-weight:500;color:var(--brand-deep)}
+.wordmark .mark{width:26px;height:26px;border-radius:5px;display:block;align-self:center;margin-inline-end:2px}
+img{max-width:100%}
+[hidden]{display:none!important}
+.tag-maket{
+  font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--sand);
+  border:1px solid var(--sand);border-radius:2px;
+  padding:2px 5px;line-height:1;align-self:center;
+}
+.masthead nav{
+  display:flex;gap:22px;margin-inline-start:auto;
+  font-size:14.5px;
+}
+.masthead nav a{text-decoration:none;color:var(--muted);white-space:nowrap}
+.masthead nav a:hover{color:var(--ink)}
+.masthead nav a[aria-current="page"]{color:var(--ink);font-weight:600}
+.uisel{display:flex;gap:1px;font-family:var(--mono);font-size:10.5px}
+.uisel button{
+  appearance:none;border:0;background:none;cursor:pointer;color:var(--muted);
+  font:inherit;letter-spacing:.1em;padding:5px 6px;border-radius:2px;
+}
+.uisel button:hover{color:var(--ink)}
+.uisel button[aria-pressed="true"]{color:var(--brand-deep);background:var(--brand-wash)}
+
+/* ---------- заявление ---------- */
+.thesis{padding:46px 0 30px;max-width:47ch}
+.thesis h1{
+  margin:0;font-family:var(--display);font-weight:600;
+  font-size:clamp(30px,4vw,44px);line-height:1.05;letter-spacing:-.032em;
+  text-wrap:balance;
+}
+.thesis p{margin:16px 0 0;color:var(--muted);font-size:17px;max-width:56ch}
+
+/* ---------- консоль ---------- */
+.console{
+  display:grid;grid-template-columns:1fr 1fr;
+  background:var(--surface);border:1px solid var(--rule);border-radius:6px;
+  box-shadow:var(--shadow);position:relative;overflow:hidden;
+}
+.pane{display:flex;flex-direction:column;min-width:0}
+.pane + .pane{border-inline-start:1px solid var(--rule)}
+.pane-out{background:var(--brand-wash)}
+
+.pane-head{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:13px 18px;border-bottom:1px solid var(--rule-soft);min-height:52px;
+}
+.pane-role{
+  font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--muted);white-space:nowrap;
+}
+.chips{display:flex;gap:4px;flex-wrap:wrap;margin-inline-start:auto}
+.chip{
+  appearance:none;cursor:pointer;font-family:var(--mono);font-size:11px;
+  letter-spacing:.06em;padding:4px 8px;border-radius:3px;line-height:1.3;
+  border:1px solid var(--rule);background:transparent;color:var(--muted);
+}
+.chip:hover{border-color:var(--brand-edge);color:var(--ink)}
+.chip[aria-pressed="true"]{
+  border-color:var(--brand);background:var(--brand);color:var(--on-brand);font-weight:500;
+}
+.chip[disabled]{opacity:.32;cursor:not-allowed}
+
+.pane-body{padding:18px;flex:1;display:flex;flex-direction:column;min-height:196px}
+#src{
+  appearance:none;border:0;background:none;color:inherit;resize:none;
+  font-family:var(--body);font-size:19px;line-height:1.5;width:100%;flex:1;
+  padding:0;min-height:104px;
+}
+#src::placeholder{color:var(--muted);opacity:.75}
+#src:focus{outline:0}
+
+.out-text{
+  font-size:19px;line-height:1.5;flex:1;white-space:pre-wrap;word-break:break-word;
+  min-height:104px;
+}
+.out-text.is-empty{color:var(--muted);opacity:.75}
+.out-text.is-missing{font-size:15.5px;color:var(--muted);line-height:1.5}
+.out-translit{
+  margin-top:10px;padding-top:10px;border-top:1px dashed var(--rule);
+  font-family:var(--mono);font-size:13px;color:var(--muted);letter-spacing:.01em;
+}
+.out-translit[hidden]{display:none}
+
+/* строка туркменских букв — ради этого сайт и нужен */
+.letters{
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+  padding:9px 18px;border-top:1px solid var(--rule-soft);background:var(--sand-wash);
+}
+.letters-label{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--sand);margin-inline-end:4px;
+}
+.letters button{
+  appearance:none;cursor:pointer;border:1px solid transparent;background:var(--surface);
+  color:var(--ink);font-family:var(--body);font-size:15px;line-height:1;
+  width:27px;height:27px;border-radius:3px;padding:0;
+}
+.letters button:hover{border-color:var(--sand);color:var(--sand)}
+.letters[hidden]{display:none}
+
+.pane-foot{
+  display:flex;align-items:center;gap:14px;
+  padding:10px 18px;border-top:1px solid var(--rule-soft);min-height:44px;
+}
+.count{
+  font-family:var(--mono);font-size:11.5px;color:var(--muted);
+  font-variant-numeric:tabular-nums;
+}
+.count.over{color:var(--sand)}
+.acts{display:flex;gap:14px;margin-inline-start:auto}
+.act{
+  appearance:none;border:0;background:none;cursor:pointer;padding:0;
+  font-family:var(--body);font-size:13.5px;color:var(--muted);
+  border-bottom:1px solid transparent;line-height:1.4;
+}
+.act:hover{color:var(--brand-deep);border-bottom-color:var(--brand-edge)}
+.act[disabled]{opacity:.35;cursor:not-allowed}
+.act[disabled]:hover{color:var(--muted);border-bottom-color:transparent}
+
+.swap{
+  position:absolute;left:50%;top:26px;transform:translateX(-50%);
+  width:30px;height:30px;border-radius:50%;cursor:pointer;
+  border:1px solid var(--rule);background:var(--surface);color:var(--muted);
+  display:grid;place-items:center;font-size:14px;line-height:1;padding:0;z-index:2;
+}
+.swap:hover{border-color:var(--brand);color:var(--brand-deep)}
+
+/* ---------- честная полоса состояния ---------- */
+.status{
+  display:flex;gap:12px;align-items:flex-start;
+  margin-top:14px;padding:12px 16px;
+  border:1px solid var(--rule);border-inline-start:2px solid var(--sand);
+  border-radius:4px;background:var(--surface-2);
+  font-size:14px;color:var(--muted);
+}
+.status b{color:var(--ink);font-weight:600}
+
+.tryrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:18px}
+.tryrow .lbl{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);
+}
+.try{
+  appearance:none;cursor:pointer;border:1px solid var(--rule);background:var(--surface);
+  color:var(--ink);font-family:var(--body);font-size:13.5px;
+  padding:5px 11px;border-radius:14px;line-height:1.35;
+}
+.try:hover{border-color:var(--brand);color:var(--brand-deep)}
+
+/* ---------- разделы ---------- */
+section.block{padding:64px 0 0}
+.label{
+  display:flex;align-items:baseline;gap:12px;
+  font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.15em;
+  color:var(--muted);margin:0 0 22px;padding-bottom:12px;border-bottom:1px solid var(--rule);
+}
+.label .n{margin-inline-start:auto;font-variant-numeric:tabular-nums;letter-spacing:.08em}
+
+.wings{display:grid;grid-template-columns:1fr 1fr;gap:0 44px}
+.wing-name{
+  font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-.01em;
+  margin:0 0 14px;padding-bottom:9px;border-bottom:2px solid var(--ink);
+}
+.sclist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+.sclist li{display:flex;gap:12px;align-items:baseline}
+.sc-t{font-size:15.5px;font-weight:500;white-space:nowrap}
+.sc-s{font-size:13px;color:var(--muted);min-width:0}
+
+.appgrid{display:grid;grid-template-columns:1.25fr 1fr;gap:0 44px;align-items:start}
+.appgrid p{margin:0 0 14px;color:var(--muted);font-size:15.5px;max-width:52ch}
+.appgrid p:first-child{color:var(--ink);font-size:16.5px}
+.stores{display:flex;flex-direction:column;gap:9px}
+.store{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  text-decoration:none;border:1px solid var(--rule);border-radius:4px;
+  padding:11px 14px;background:var(--surface);
+}
+.store:hover{border-color:var(--brand);}
+.store .s-n{font-size:15px;font-weight:500}
+.store .s-m{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.store:hover .s-m{color:var(--brand-deep)}
+
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0 32px;margin-top:26px}
+.fact{border-top:1px solid var(--rule);padding-top:11px}
+.fact .v{
+  font-family:var(--display);font-size:25px;font-weight:600;letter-spacing:-.02em;
+  line-height:1;font-variant-numeric:tabular-nums;
+}
+.fact .k{margin-top:6px;font-size:13px;color:var(--muted)}
+
+footer{
+  margin-top:66px;padding-top:20px;border-top:1px solid var(--rule);
+  display:flex;gap:10px 30px;flex-wrap:wrap;align-items:baseline;
+  font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.02em;
+}
+footer a{text-decoration:none;border-bottom:1px solid var(--rule)}
+footer a:hover{color:var(--ink);border-bottom-color:var(--muted)}
+footer .org{color:var(--org);border-bottom-color:transparent}
+footer .sp{margin-inline-start:auto}
+
+@media (max-width:880px){
+  .page{padding:0 22px 64px}
+  .masthead{flex-wrap:wrap;gap:12px 18px}
+  .masthead nav{order:3;width:100%;margin-inline-start:0;gap:18px;overflow-x:auto}
+  .uisel{margin-inline-start:auto}
+  .console{grid-template-columns:1fr}
+  .pane + .pane{border-inline-start:0;border-top:1px solid var(--rule)}
+  .swap{left:auto;right:18px;top:auto;bottom:calc(50% - 15px);transform:none}
+  .wings,.appgrid{grid-template-columns:1fr;gap:34px}
+  .facts{grid-template-columns:1fr 1fr;gap:0 24px;row-gap:18px}
+  .thesis{padding:34px 0 24px}
+  section.block{padding-top:50px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <a class="wordmark" href="#"><img class="mark" src="icon.png" width="192" height="192" alt="">Ykjam <i>Terjime</i></a>
+    <span class="tag-maket" data-i18n="maket">maket</span>
+    <nav>
+      <a href="#" aria-current="page" data-i18n="navTranslate">Terjimeçi</a>
+      <a href="#phrasebook" data-i18n="navBook">Gepleşik kitaby</a>
+      <a href="#app" data-i18n="navApp">Programma</a>
+      <a href="https://github.com/Shapak-Apps/turkmen-phrasebook" data-i18n="navProject">Taslama</a>
+    </nav>
+    <div class="uisel" role="group" aria-label="Interface language">
+      <button data-ui="tk" aria-pressed="true">TK</button>
+      <button data-ui="ru" aria-pressed="false">RU</button>
+      <button data-ui="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <div class="thesis">
+    <h1 data-i18n="h1">Türkmen dili üçin terjimeçi</h1>
+    <p data-i18n="lead">Türkmen dilinden we türkmen diline. Klawiatura ä, ç, ž, ň, ö, ş, ü, ý harplaryny bermeýän bolsa — aşakdaky hatardan basyň.</p>
+  </div>
+
+  <div class="console">
+    <button class="swap" id="swap" title="Dilleri çalyş" aria-label="Dilleri çalyş">⇄</button>
+
+    <div class="pane">
+      <div class="pane-head">
+        <span class="pane-role" data-i18n="srcRole">Çeşme dili</span>
+        <div class="chips" id="chips-src"></div>
+      </div>
+      <div class="pane-body">
+        <textarea id="src" rows="4" spellcheck="false" placeholder="Terjime etmek üçin tekst giriziň..."></textarea>
+      </div>
+      <div class="letters" id="letters">
+        <span class="letters-label" data-i18n="lettersLabel">Türkmen harplary</span>
+      </div>
+      <div class="pane-foot">
+        <span class="count" id="count">0 / 5000</span>
+        <div class="acts">
+          <button class="act" id="listen-src" data-i18n="listen">Diňle</button>
+          <button class="act" id="clear" data-i18n="clear">Arassala</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pane pane-out">
+      <div class="pane-head">
+        <span class="pane-role" data-i18n="tgtRole">Niýetlenen dili</span>
+        <div class="chips" id="chips-tgt"></div>
+      </div>
+      <div class="pane-body">
+        <div class="out-text is-empty" id="out" data-i18n="outEmpty">Terjime şu ýerde görkeziler</div>
+        <div class="out-translit" id="translit" hidden></div>
+      </div>
+      <div class="pane-foot">
+        <div class="acts">
+          <button class="act" id="listen-out" data-i18n="listen" disabled>Diňle</button>
+          <button class="act" id="copy" data-i18n="copy" disabled>Göçür</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="status">
+    <span data-i18n="statusText"><b>Bu sahypa — maket.</b> Terjime hyzmaty entek birikdirilmedi. Aşakdaky mysallar programmadaky hakyky sözlemlerden alyndy — beýleki tekstler entek terjime edilmeýär.</span>
+  </div>
+
+  <div class="tryrow" id="tryrow">
+    <span class="lbl" data-i18n="tryLabel">Synanyşyp görüň</span>
+  </div>
+
+  <section class="block" id="phrasebook">
+    <p class="label">
+      <span data-i18n="secBook">Gepleşik kitaby</span>
+      <span class="n">13 · 295</span>
+    </p>
+    <div class="wings">
+      <div>
+        <h2 class="wing-name">✈️ Men gidýärin</h2>
+        <ul class="sclist">
+          <li><span class="sc-t">Aeroport we serhet</span><span class="sc-s">Bellige alyş · Pasport gözegçiligi · Goş almak · SIM we pul</span></li>
+          <li><span class="sc-t">Ulag</span><span class="sc-s">Taksi · Metro we awtobus · Otly</span></li>
+          <li><span class="sc-t">Myhmanhana</span><span class="sc-s">Ýerleşmek · Otagdaky kynçylyklar · Çykyş</span></li>
+          <li><span class="sc-t">Nahar</span><span class="sc-s">Stol · Sargyt · Hasap</span></li>
+          <li><span class="sc-t">Söwda</span><span class="sc-s">Baha · Geýip görmek · Töleg</span></li>
+          <li><span class="sc-t">Pul we aragatnaşyk</span><span class="sc-s">Bankomat · Pul çalyşmak · Aragatnaşyk</span></li>
+          <li><span class="sc-t">Saglyk</span><span class="sc-s">Dermanhana · Lukman · Gyssagly kömek</span></li>
+          <li><span class="sc-t">Kynçylyklar</span><span class="sc-s">Ýiten zatlar · Polisiýa · Jedel</span></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="wing-name">🏡 Myhman geldi</h2>
+        <ul class="sclist">
+          <li><span class="sc-t">Ýol soraýarlar</span><span class="sc-s">Soraglar · Jogaplar</span></li>
+          <li><span class="sc-t">Men taksiçi</span><span class="sc-s">Başlangyç · Baha · Ýolda</span></li>
+          <li><span class="sc-t">Men satyjy</span><span class="sc-s">Baha · Söwdalaşyk · Töleg</span></li>
+          <li><span class="sc-t">Myhmançylyk</span><span class="sc-s">Çakylyk · Çaý başynda · Söhbet</span></li>
+          <li><span class="sc-t">Kömek etmek</span><span class="sc-s">Kömek teklibi · Kynçylyk · Ugratmak</span></li>
+        </ul>
+        <div class="facts">
+          <div class="fact"><div class="v">295</div><div class="k" data-i18n="factPhrases">sözlem</div></div>
+          <div class="fact"><div class="v">13</div><div class="k" data-i18n="factScenarios">sahna</div></div>
+          <div class="fact"><div class="v">35</div><div class="k" data-i18n="factCore">iň gerek sözlem</div></div>
+          <div class="fact"><div class="v">5</div><div class="k" data-i18n="factLangs">dil</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="app">
+    <p class="label"><span data-i18n="secApp">Telefondaky programma</span></p>
+    <div class="appgrid">
+      <div>
+        <p data-i18n="appLead">Gepleşik kitaby telefonda internetsiz işleýär — şonuň üçin ol serhetde, dermanhanada we aragatnaşyk ýok ýerde elýeterli.</p>
+        <p data-i18n="appBody">Ekrany görkezmek režimi: telefony beriň — söhbetdeşiňiz jümläni okap, jogaby basýar, siz ony türkmençe görýärsiňiz. Interfeýs 5 dilde.</p>
+      </div>
+      <div class="stores">
+        <a class="store" href="https://apps.apple.com/app/ykjam-terjime/id6758071845">
+          <span class="s-n">App Store</span><span class="s-m">iOS</span>
+        </a>
+        <a class="store" href="https://play.google.com/store/apps/details?id=com.shapak.translator">
+          <span class="s-n">Google Play</span><span class="s-m">Android</span>
+        </a>
+        <a class="store" href="https://github.com/Shapak-Apps/turkmen-phrasebook">
+          <span class="s-n">GitHub</span><span class="s-m">MIT</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Ykjam Terjime</span>
+    <a class="org" href="https://shapak-apps.github.io/">şapak — Open Source Turkmenistan</a>
+    <a href="https://github.com/Shapak-Apps/turkmen-phrasebook">GitHub</a>
+    <a href="https://shapak-apps.github.io/ykjam-terjime/privacy-policy.html" data-i18n="privacy">Gizlinlik</a>
+    <span class="sp">shapak.apps@gmail.com</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var LANGS = {
+    tk: { code: "TK", tts: "tr-TR", tk: "Türkmen dili", ru: "Туркменский", en: "Turkmen" },
+    ru: { code: "RU", tts: "ru-RU", tk: "Rus dili",     ru: "Русский",     en: "Russian" },
+    en: { code: "EN", tts: "en-US", tk: "Iňlis dili",   ru: "Английский",  en: "English" },
+    zh: { code: "ZH", tts: "zh-CN", tk: "Hytaý dili",   ru: "Китайский",   en: "Chinese" },
+    tr: { code: "TR", tts: "tr-TR", tk: "Türk dili",    ru: "Турецкий",    en: "Turkish" }
+  };
+  var ORDER = ["tk", "ru", "en", "zh", "tr"];
+  var TK_LETTERS = ["ä", "ç", "ž", "ň", "ö", "ş", "ü", "ý"];
+  var LIMIT = 5000;
+
+  // Восемь фраз из src/data/scenarios/texts/*.ts — настоящие данные приложения.
+  var DEMO = [
+    { tk: "Salam!", ru: "Здравствуйте", en: "Hello", zh: "你好!", zt: "nǐ hǎo!" },
+    { tk: "Sag boluň!", ru: "Спасибо", en: "Thank you", zh: "谢谢!", zt: "xiè xiè!" },
+    { tk: "Bu näçe durýar?", ru: "Сколько это стоит?", en: "How much is it?", zh: "这个多少钱?", zt: "zhè ge duō shǎo qián?" },
+    { tk: "Hajathana nirede?", ru: "Где туалет?", en: "Where is the toilet?", zh: "厕所在哪里?", zt: "cè suǒ zài nǎ lǐ?" },
+    { tk: "Men düşünemok", ru: "Я не понимаю", en: "I don't understand", zh: "我听不懂", zt: "wǒ tīng bù dǒng" },
+    { tk: "Haýyş edýärin, haýalrak gepläň", ru: "Говорите медленнее, пожалуйста", en: "Please speak slower", zh: "请说慢一点", zt: "qǐng shuō màn yì diǎn" },
+    { tk: "Men azaşdym", ru: "Я заблудился", en: "I'm lost", zh: "我迷路了", zt: "wǒ mí lù le" },
+    { tk: "Maňa lukman gerek", ru: "Мне нужен врач", en: "I need a doctor", zh: "我需要医生", zt: "wǒ xū yào yī shēng" }
+  ];
+
+  var STR = {
+    tk: {
+      maket: "maket",
+      navTranslate: "Terjimeçi", navBook: "Gepleşik kitaby", navApp: "Programma", navProject: "Taslama",
+      h1: "Türkmen dili üçin terjimeçi",
+      lead: "Türkmen dilinden we türkmen diline. Klawiatura ä, ç, ž, ň, ö, ş, ü, ý harplaryny bermeýän bolsa — aşakdaky hatardan basyň.",
+      srcRole: "Çeşme dili", tgtRole: "Niýetlenen dili",
+      placeholder: "Terjime etmek üçin tekst giriziň...",
+      outEmpty: "Terjime şu ýerde görkeziler",
+      lettersLabel: "Türkmen harplary",
+      listen: "Diňle", clear: "Arassala", copy: "Göçür", copied: "Göçürildi",
+      swap: "Dilleri çalyş",
+      statusText: "<b>Bu sahypa — maket.</b> Terjime hyzmaty entek birikdirilmedi. Aşakdaky mysallar programmadaky hakyky sözlemlerden alyndy — beýleki tekstler entek terjime edilmeýär.",
+      tryLabel: "Synanyşyp görüň",
+      notReady: "Bu sözlem entek maketde ýok. Terjime hyzmaty birikdirilenden soň islendik tekst terjime ediler.",
+      tooLong: "Tekst gaty uzyn. Iň köp 5000 simwol.",
+      secBook: "Gepleşik kitaby", secApp: "Telefondaky programma",
+      factPhrases: "sözlem", factScenarios: "sahna", factCore: "iň gerek sözlem", factLangs: "dil",
+      appLead: "Gepleşik kitaby telefonda internetsiz işleýär — şonuň üçin ol serhetde, dermanhanada we aragatnaşyk ýok ýerde elýeterli.",
+      appBody: "Ekrany görkezmek režimi: telefony beriň — söhbetdeşiňiz jümläni okap, jogaby basýar, siz ony türkmençe görýärsiňiz. Interfeýs 5 dilde.",
+      privacy: "Gizlinlik"
+    },
+    ru: {
+      maket: "макет",
+      navTranslate: "Переводчик", navBook: "Разговорник", navApp: "Приложение", navProject: "Проект",
+      h1: "Переводчик для туркменского языка",
+      lead: "С туркменского и на туркменский. Если клавиатура не даёт ä, ç, ž, ň, ö, ş, ü, ý — нажимайте буквы в строке под полем.",
+      srcRole: "Язык оригинала", tgtRole: "Язык перевода",
+      placeholder: "Введите текст для перевода...",
+      outEmpty: "Здесь появится перевод",
+      lettersLabel: "Туркменские буквы",
+      listen: "Прослушать", clear: "Очистить", copy: "Копировать", copied: "Скопировано",
+      swap: "Поменять языки",
+      statusText: "<b>Это макет.</b> Движок перевода ещё не подключён. Примеры ниже взяты из настоящих фраз приложения — остальной текст пока не переводится.",
+      tryLabel: "Попробуйте",
+      notReady: "Этой фразы в макете пока нет. Когда движок будет подключён, переводиться будет любой текст.",
+      tooLong: "Текст слишком длинный. Максимум 5000 символов.",
+      secBook: "Разговорник", secApp: "Приложение на телефоне",
+      factPhrases: "фраз", factScenarios: "сценариев", factCore: "самых нужных", factLangs: "языков",
+      appLead: "Разговорник на телефоне работает без интернета — поэтому он доступен на границе, в аптеке и там, где нет связи.",
+      appBody: "Режим «покажи экран»: отдайте телефон — собеседник читает фразу и нажимает ответ, вы видите его по-туркменски. Интерфейс на 5 языках.",
+      privacy: "Приватность"
+    },
+    en: {
+      maket: "mockup",
+      navTranslate: "Translator", navBook: "Phrasebook", navApp: "App", navProject: "Project",
+      h1: "A translator for the Turkmen language",
+      lead: "From Turkmen and into Turkmen. If your keyboard has no ä, ç, ž, ň, ö, ş, ü, ý — tap them in the row below the field.",
+      srcRole: "Source language", tgtRole: "Target language",
+      placeholder: "Enter text to translate...",
+      outEmpty: "The translation will appear here",
+      lettersLabel: "Turkmen letters",
+      listen: "Listen", clear: "Clear", copy: "Copy", copied: "Copied",
+      swap: "Swap languages",
+      statusText: "<b>This page is a mockup.</b> The translation engine is not connected yet. The examples below come from the app's real phrases — other text is not translated yet.",
+      tryLabel: "Try these",
+      notReady: "This phrase is not in the mockup yet. Once the engine is connected, any text will translate.",
+      tooLong: "Text is too long. 5000 characters maximum.",
+      secBook: "Phrasebook", secApp: "The app on your phone",
+      factPhrases: "phrases", factScenarios: "scenarios", factCore: "survival phrases", factLangs: "languages",
+      appLead: "The phrasebook works offline on the phone — so it is there at the border, at the pharmacy, and anywhere without a signal.",
+      appBody: "Show-the-screen mode: hand over the phone — the other person reads the sentence and taps an answer, you see it in Turkmen. Interface in 5 languages.",
+      privacy: "Privacy"
+    }
+  };
+
+  var ui = "tk";
+  var src = "tk";
+  var tgt = "ru";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var elSrc = $("src"), elOut = $("out"), elTranslit = $("translit"), elCount = $("count");
+  var elCopy = $("copy"), elListenOut = $("listen-out"), elListenSrc = $("listen-src");
+
+  function norm(s) {
+    return String(s).toLowerCase().replace(/[!?.,;:。！？]+\s*$/g, "").trim();
+  }
+
+  function lookup(text, from, to) {
+    var key = norm(text);
+    if (!key) return null;
+    for (var i = 0; i < DEMO.length; i++) {
+      var row = DEMO[i];
+      if (row[from] && norm(row[from]) === key) {
+        return row[to] ? { text: row[to], translit: to === "zh" ? row.zt : "" } : null;
+      }
+    }
+    return null;
+  }
+
+  function t(key) { return STR[ui][key]; }
+
+  function paintChips(host, which) {
+    host.innerHTML = "";
+    ORDER.forEach(function (code) {
+      var b = document.createElement("button");
+      b.className = "chip";
+      b.type = "button";
+      b.textContent = LANGS[code].code;
+      b.title = LANGS[code][ui] || LANGS[code].en;
+      var active = which === "src" ? src === code : tgt === code;
+      b.setAttribute("aria-pressed", active ? "true" : "false");
+      if (which === "src" ? tgt === code : src === code) b.disabled = true;
+      b.addEventListener("click", function () {
+        if (which === "src") src = code; else tgt = code;
+        render();
+      });
+      host.appendChild(b);
+    });
+  }
+
+  function paintLetters() {
+    var host = $("letters");
+    host.hidden = src !== "tk";
+    var old = host.querySelectorAll("button");
+    for (var i = 0; i < old.length; i++) old[i].remove();
+    TK_LETTERS.forEach(function (ch) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = ch;
+      b.addEventListener("click", function () { insert(ch); });
+      host.appendChild(b);
+    });
+  }
+
+  function insert(ch) {
+    var a = elSrc.selectionStart, b = elSrc.selectionEnd, v = elSrc.value;
+    elSrc.value = v.slice(0, a) + ch + v.slice(b);
+    elSrc.selectionStart = elSrc.selectionEnd = a + ch.length;
+    elSrc.focus();
+    render();
+  }
+
+  function speak(text, code) {
+    if (!("speechSynthesis" in window) || !text) return;
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = LANGS[code].tts;
+    u.rate = 0.92;
+    window.speechSynthesis.speak(u);
+  }
+
+  function render() {
+    document.documentElement.lang = ui;
+    document.querySelectorAll("[data-i18n]").forEach(function (n) {
+      var v = STR[ui][n.getAttribute("data-i18n")];
+      if (v === undefined) return;
+      if (v.indexOf("<b>") === 0) n.innerHTML = v; else n.textContent = v;
+    });
+    elSrc.setAttribute("placeholder", t("placeholder"));
+    $("swap").title = t("swap");
+    $("swap").setAttribute("aria-label", t("swap"));
+    elListenSrc.title = src === "tk" ? "TTS: tr-TR" : "TTS: " + LANGS[src].tts;
+
+    paintChips($("chips-src"), "src");
+    paintChips($("chips-tgt"), "tgt");
+    paintLetters();
+
+    var raw = elSrc.value;
+    var len = raw.length;
+    elCount.textContent = len + " / " + LIMIT;
+    elCount.className = len > LIMIT ? "count over" : "count";
+    elListenSrc.disabled = !raw.trim();
+
+    elOut.className = "out-text";
+    elTranslit.hidden = true;
+
+    if (!raw.trim()) {
+      elOut.className = "out-text is-empty";
+      elOut.textContent = t("outEmpty");
+      elCopy.disabled = true; elListenOut.disabled = true;
+      return;
+    }
+    if (len > LIMIT) {
+      elOut.className = "out-text is-missing";
+      elOut.textContent = t("tooLong");
+      elCopy.disabled = true; elListenOut.disabled = true;
+      return;
+    }
+    var hit = lookup(raw, src, tgt);
+    if (hit) {
+      elOut.textContent = hit.text;
+      if (hit.translit) { elTranslit.textContent = hit.translit; elTranslit.hidden = false; }
+      elCopy.disabled = false; elListenOut.disabled = false;
+    } else {
+      elOut.className = "out-text is-missing";
+      elOut.textContent = t("notReady");
+      elCopy.disabled = true; elListenOut.disabled = true;
+    }
+  }
+
+  function paintTry() {
+    var host = $("tryrow");
+    var old = host.querySelectorAll("button");
+    for (var i = 0; i < old.length; i++) old[i].remove();
+    DEMO.slice(0, 5).forEach(function (row) {
+      var b = document.createElement("button");
+      b.className = "try";
+      b.type = "button";
+      b.textContent = row[src] || row.tk;
+      b.addEventListener("click", function () {
+        elSrc.value = row[src] || row.tk;
+        render();
+        elSrc.focus();
+      });
+      host.appendChild(b);
+    });
+  }
+
+  elSrc.addEventListener("input", render);
+  $("clear").addEventListener("click", function () { elSrc.value = ""; render(); elSrc.focus(); });
+  $("swap").addEventListener("click", function () {
+    var a = src; src = tgt; tgt = a;
+    var hit = lookup(elSrc.value, tgt, src);
+    if (hit) elSrc.value = hit.text;
+    render(); paintTry();
+  });
+  elCopy.addEventListener("click", function () {
+    var v = elOut.textContent;
+    if (navigator.clipboard) navigator.clipboard.writeText(v);
+    var before = elCopy.textContent;
+    elCopy.textContent = t("copied");
+    setTimeout(function () { elCopy.textContent = before; }, 1400);
+  });
+  elListenOut.addEventListener("click", function () { speak(elOut.textContent, tgt); });
+  elListenSrc.addEventListener("click", function () { speak(elSrc.value, src); });
+
+  document.querySelectorAll("[data-ui]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      ui = b.getAttribute("data-ui");
+      document.querySelectorAll("[data-ui]").forEach(function (o) {
+        o.setAttribute("aria-pressed", o === b ? "true" : "false");
+      });
+      render(); paintTry();
+    });
+  });
+
+  elSrc.value = "Bu näçe durýar?";
+  render();
+  paintTry();
+})();
+</script>
+</body>
+</html>
