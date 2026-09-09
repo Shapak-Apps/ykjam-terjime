@@ -6,11 +6,19 @@ Türkmen dili üçin terjimeçi we gepleşik kitaby. Sahypanyň kody.
 
 ## Sahypada näme bar
 
-- Terjime konsoly — çeşme we niýetlenen dil: `TK` `RU` `EN` `ZH` `TR`
+Gapdal menýuda üç bölüm:
+
+- **Tekst** — terjime konsoly. Bäş dil: `TK` `RU` `EN` `ZH` `TR`
+- **Gepleşik kitaby** — 13 sahna, 295 sözlem, iki ganat
+- **Programma** — App Store we Google Play
+
+Konsolda:
+
 - **Türkmen harplary hatary** — `ä ç ž ň ö ş ü ý`, klawiatura olary bermeýän bolsa basyp ýazmak üçin
 - Hytaý dili üçin transkripsiýa (pinyin)
-- Gepleşik kitabynyň indeksi — 13 sahna, 295 sözlem
-- Interfeýs üç dilde: türkmen, rus, iňlis
+- `Diňle` — brauzeriň sesi bilen; türkmen dili üçin `tr-TR`, programmadaky ýaly
+
+Interfeýs üç dilde: türkmen, rus, iňlis.
 
 ## Gurluş
 
