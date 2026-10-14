@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# внутренний файл: планы по модели и юрисдикции, репозиторий публичный
+HANDOFF.md
