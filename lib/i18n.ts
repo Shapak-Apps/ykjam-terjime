@@ -78,6 +78,11 @@ export type Strings = {
   heroTitle: string;
   heroBody: string;
 
+  notFoundTitle: string;
+  notFoundBody: string;
+  notFoundHome: string;
+  skipLink: string;
+
   footSite: string;
   footApp: string;
   footPrivacy: string;
@@ -156,6 +161,11 @@ export const STRINGS: Record<UiLang, Strings> = {
     heroTitle: "Türkmen dili üçin terjimeçi",
     heroBody:
       "Häzir bäş dil elýeterli: türkmen, rus, iňlis, hytaý we türk. Klawiaturada ä, ç, ž, ň, ö, ş, ü, ý harplary ýok bolsa — olar ýazgy meýdanynyň aşagynda.",
+    notFoundTitle: "Sahypa tapylmady",
+    notFoundBody:
+      "Bu salgy boýunça sahypa ýok. Belki salgyda ýalňyşlyk bar ýa-da sahypa göçürildi.",
+    notFoundHome: "Baş sahypa",
+    skipLink: "Esasy mazmuna geç",
     footSite: "Sahypanyň kody",
     footApp: "Programmanyň kody",
     footPrivacy: "Gizlinlik syýasaty",
@@ -233,6 +243,11 @@ export const STRINGS: Record<UiLang, Strings> = {
     heroTitle: "Переводчик для туркменского языка",
     heroBody:
       "Сейчас доступно пять языков: туркменский, русский, английский, китайский и турецкий. Если на клавиатуре нет ä, ç, ž, ň, ö, ş, ü, ý — они под полем ввода.",
+    notFoundTitle: "Страница не найдена",
+    notFoundBody:
+      "По этому адресу страницы нет. Возможно, в адресе опечатка или страница переехала.",
+    notFoundHome: "На главную",
+    skipLink: "Перейти к содержимому",
     footSite: "Код сайта",
     footApp: "Код приложения",
     footPrivacy: "Политика приватности",
@@ -310,6 +325,11 @@ export const STRINGS: Record<UiLang, Strings> = {
     heroTitle: "A translator for the Turkmen language",
     heroBody:
       "Five languages are available today: Turkmen, Russian, English, Chinese and Turkish. If your keyboard has no ä, ç, ž, ň, ö, ş, ü, ý — they sit under the input field.",
+    notFoundTitle: "Page not found",
+    notFoundBody:
+      "There is no page at this address. The link may have a typo, or the page has moved.",
+    notFoundHome: "Go to the start page",
+    skipLink: "Skip to content",
     footSite: "Website source",
     footApp: "App source",
     footPrivacy: "Privacy policy",

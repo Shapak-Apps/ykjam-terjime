@@ -7,6 +7,10 @@
  */
 export const BASE_PATH = "/ykjam-terjime";
 
+/** Полный адрес сайта. Нужен там, где относительных путей мало:
+ *  карта сайта, robots, картинка ссылки в мессенджерах. */
+export const SITE_URL = "https://shapak-apps.github.io/ykjam-terjime";
+
 export function asset(path: string): string {
   return `${BASE_PATH}${path.startsWith("/") ? path : `/${path}`}`;
 }
