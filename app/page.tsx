@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useUi } from "./providers";
-import { HeroDemo } from "@/components/HeroDemo";
 
 const iconClass = "size-6 text-brand transition-transform duration-200 group-hover:scale-110";
 
@@ -61,9 +60,7 @@ export default function HomePage() {
       </h1>
       <p className="mt-[18px] max-w-[62ch] text-[16.5px] text-muted">{t.homeLead}</p>
 
-      <HeroDemo />
-
-      <div className="mt-4 grid gap-4 md:grid-cols-2">
+      <div className="mt-9 grid gap-4 md:grid-cols-2">
         {services.map((service) => (
           <Link
             key={service.href}

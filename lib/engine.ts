@@ -86,22 +86,6 @@ const DEMO: DemoRow[] = [
   },
 ];
 
-/** Пары для живого показа на главной: берём из тех же настоящих фраз. */
-export type ShowcaseItem = {
-  from: Lang;
-  to: Lang;
-  source: string;
-  target: string;
-  translit?: string;
-};
-
-export const SHOWCASE: ShowcaseItem[] = [
-  { from: "tk", to: "ru", source: DEMO[3].tk!, target: DEMO[3].ru! },
-  { from: "tk", to: "zh", source: DEMO[2].tk!, target: DEMO[2].zh!, translit: DEMO[2].zt },
-  { from: "tk", to: "en", source: DEMO[7].tk!, target: DEMO[7].en! },
-  { from: "tk", to: "ru", source: DEMO[5].tk!, target: DEMO[5].ru! },
-];
-
 function normalize(value: string): string {
   return value.toLowerCase().replace(/[!?.,;:。！？]+\s*$/g, "").trim();
 }

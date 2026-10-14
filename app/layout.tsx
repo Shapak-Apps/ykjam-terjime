@@ -52,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-full bg-bg text-ink">
         <UiProvider>
           <SkipLink />
-          <div className="mx-auto grid max-w-[1420px] md:grid-cols-[236px_minmax(0,1fr)]">
+          <div className="grid md:grid-cols-[236px_minmax(0,1fr)]">
             <Sidebar />
             {/*
               Колонка содержимого тянется на всю высоту экрана, а подвал
