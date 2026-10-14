@@ -33,16 +33,12 @@ export type Strings = {
   copy: string;
   copied: string;
   swap: string;
-  tryCap: string;
 
   stateNotReady: string;
   stateTooLong: string;
   stateOffline: string;
   stateError: string;
 
-  historyTitle: string;
-  historyEmpty: string;
-  historyClear: string;
 
   voiceTitle: string;
   voiceLead: string;
@@ -71,10 +67,6 @@ export type Strings = {
   appP2: string;
   appP3: string;
 
-  pOffTitle: string;
-  pOffBody: string;
-  pMaketTitle: string;
-  pMaketBody: string;
   heroTitle: string;
   heroBody: string;
 
@@ -109,7 +101,6 @@ export const STRINGS: Record<UiLang, Strings> = {
     copy: "Göçür",
     copied: "Göçürildi",
     swap: "Dilleri çalyş",
-    tryCap: "Synanyşyp görüň",
 
     stateNotReady:
       "Bu sözlem entek maketde ýok. Terjime hyzmaty birikdirilenden soň islendik tekst terjime ediler.",
@@ -117,9 +108,6 @@ export const STRINGS: Record<UiLang, Strings> = {
     stateOffline: "Internet baglanyşygy ýok. Baglanyşygy barlap gaýtadan synanyşyň.",
     stateError: "Terjime şowsuz boldy. Gaýtadan synanyşyň.",
 
-    historyTitle: "Soňky terjimeler",
-    historyEmpty: "Entek terjime ýok",
-    historyClear: "Taryhy arassala",
 
     voiceTitle: "Ses terjimesi",
     voiceLead:
@@ -152,12 +140,6 @@ export const STRINGS: Record<UiLang, Strings> = {
       "Ekrany görkezmek režimi: telefony beriň — söhbetdeşiňiz jümläni okap, jogaby basýar, siz ony türkmençe görýärsiňiz.",
     appP3: "Türkmen dili hytaý, iňlis ýa-da rus dilleri bilen jübütde. Interfeýs bäş dilde.",
 
-    pOffTitle: "Telefonda internetsiz",
-    pOffBody:
-      "Gepleşik kitaby programmada oflaýn işleýär — serhetde, dermanhanada we aragatnaşyk ýok ýerde.",
-    pMaketTitle: "Terjime hyzmaty entek ýok",
-    pMaketBody:
-      "Bu sahypa — maket. Häzir diňe programmadaky hakyky sözlemler terjime edilýär.",
     heroTitle: "Türkmen dili üçin terjimeçi",
     heroBody:
       "Häzir bäş dil elýeterli: türkmen, rus, iňlis, hytaý we türk. Klawiaturada ä, ç, ž, ň, ö, ş, ü, ý harplary ýok bolsa — olar ýazgy meýdanynyň aşagynda.",
@@ -191,7 +173,6 @@ export const STRINGS: Record<UiLang, Strings> = {
     copy: "Копировать",
     copied: "Скопировано",
     swap: "Поменять языки",
-    tryCap: "Попробуйте",
 
     stateNotReady:
       "Этой фразы в макете пока нет. Когда движок будет подключён, переводиться будет любой текст.",
@@ -199,9 +180,6 @@ export const STRINGS: Record<UiLang, Strings> = {
     stateOffline: "Нет соединения. Проверьте интернет и попробуйте снова.",
     stateError: "Перевод не удался. Попробуйте ещё раз.",
 
-    historyTitle: "Последние переводы",
-    historyEmpty: "Переводов пока нет",
-    historyClear: "Очистить историю",
 
     voiceTitle: "Голосовой перевод",
     voiceLead:
@@ -234,12 +212,6 @@ export const STRINGS: Record<UiLang, Strings> = {
       "Режим «покажи экран»: отдайте телефон — собеседник читает фразу и нажимает ответ, вы видите его по-туркменски.",
     appP3: "Туркменский в паре с китайским, английским или русским. Интерфейс на пяти языках.",
 
-    pOffTitle: "На телефоне без интернета",
-    pOffBody:
-      "Разговорник в приложении работает офлайн — на границе, в аптеке и там, где нет связи.",
-    pMaketTitle: "Перевод пока не работает",
-    pMaketBody:
-      "Это макет. Сейчас переводятся только настоящие фразы приложения.",
     heroTitle: "Переводчик для туркменского языка",
     heroBody:
       "Сейчас доступно пять языков: туркменский, русский, английский, китайский и турецкий. Если на клавиатуре нет ä, ç, ž, ň, ö, ş, ü, ý — они под полем ввода.",
@@ -273,7 +245,6 @@ export const STRINGS: Record<UiLang, Strings> = {
     copy: "Copy",
     copied: "Copied",
     swap: "Swap languages",
-    tryCap: "Try these",
 
     stateNotReady:
       "This phrase is not in the mockup yet. Once the engine is connected, any text will translate.",
@@ -281,9 +252,6 @@ export const STRINGS: Record<UiLang, Strings> = {
     stateOffline: "No connection. Check the network and try again.",
     stateError: "Translation failed. Try again.",
 
-    historyTitle: "Recent translations",
-    historyEmpty: "Nothing translated yet",
-    historyClear: "Clear history",
 
     voiceTitle: "Voice translation",
     voiceLead:
@@ -316,12 +284,6 @@ export const STRINGS: Record<UiLang, Strings> = {
       "Show-the-screen mode: hand over the phone — the other person reads the sentence and taps an answer, you see it in Turkmen.",
     appP3: "Turkmen paired with Chinese, English or Russian. Interface in five languages.",
 
-    pOffTitle: "Offline on your phone",
-    pOffBody:
-      "The phrasebook works offline in the app — at the border, at the pharmacy, and anywhere without a signal.",
-    pMaketTitle: "Translation is not live yet",
-    pMaketBody:
-      "This page is a mockup. For now only the app's real phrases translate.",
     heroTitle: "A translator for the Turkmen language",
     heroBody:
       "Five languages are available today: Turkmen, Russian, English, Chinese and Turkish. If your keyboard has no ä, ç, ž, ň, ö, ş, ü, ý — they sit under the input field.",

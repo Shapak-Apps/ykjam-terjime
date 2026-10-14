@@ -1,10 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useUi } from "@/app/providers";
 import { LANG_NAMES } from "@/lib/i18n";
 import {
-  demoPhrases,
   LANGS,
   TEXT_LIMIT,
   TTS_CODE,
@@ -14,10 +13,6 @@ import {
 } from "@/lib/engine";
 
 const TK_LETTERS = ["ä", "ç", "ž", "ň", "ö", "ş", "ü", "ý"];
-const HISTORY_KEY = "ykjam.history";
-const HISTORY_MAX = 8;
-
-type HistoryItem = { from: Lang; to: Lang; source: string; target: string };
 
 const iconButton =
   "grid size-[34px] cursor-pointer place-items-center rounded-[9px] text-muted hover:bg-brand-softer hover:text-brand-deep disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:bg-transparent disabled:hover:text-muted";
@@ -60,20 +55,10 @@ export function TextTranslator() {
   const { ui, t } = useUi();
   const [src, setSrc] = useState<Lang>("tk");
   const [tgt, setTgt] = useState<Lang>("ru");
-  const [text, setText] = useState("Bu näçe durýar?");
+  const [text, setText] = useState("");
   const [result, setResult] = useState<TranslateResult>({ status: "empty" });
   const [copied, setCopied] = useState(false);
-  const [history, setHistory] = useState<HistoryItem[]>([]);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-
-  useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(HISTORY_KEY);
-      if (raw) setHistory(JSON.parse(raw) as HistoryItem[]);
-    } catch {
-      // история — удобство, а не данные: не смогли прочитать, живём без неё
-    }
-  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -85,32 +70,17 @@ export function TextTranslator() {
     };
   }, [text, src, tgt]);
 
-  const remember = useCallback(
-    (item: HistoryItem) => {
-      setHistory((prev) => {
-        const next = [item, ...prev.filter((row) => row.source !== item.source)].slice(0, HISTORY_MAX);
-        try {
-          window.localStorage.setItem(HISTORY_KEY, JSON.stringify(next));
-        } catch {
-          // не сохранилось — список живёт до перезагрузки
-        }
-        return next;
-      });
-    },
-    [],
-  );
-
-  useEffect(() => {
-    if (result.status === "ok") {
-      remember({ from: src, to: tgt, source: text.trim(), target: result.text });
-    }
-  }, [result, src, tgt, text, remember]);
-
+  /**
+   * Буква из нижнего ряда встаёт на место курсора. Если в поле ещё не ставили
+   * курсор, selectionStart равен нулю — тогда буква уехала бы в начало строки,
+   * поэтому в таком случае дописываем в конец.
+   */
   const insertLetter = (letter: string) => {
     const field = inputRef.current;
     if (!field) return;
-    const start = field.selectionStart ?? text.length;
-    const end = field.selectionEnd ?? text.length;
+    const focused = document.activeElement === field;
+    const start = focused ? (field.selectionStart ?? text.length) : text.length;
+    const end = focused ? (field.selectionEnd ?? text.length) : text.length;
     const next = text.slice(0, start) + letter + text.slice(end);
     setText(next);
     requestAnimationFrame(() => {
@@ -143,16 +113,7 @@ export function TextTranslator() {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1500);
     } catch {
-      // буфер недоступен — молча, кнопка просто не даст подтверждения
-    }
-  };
-
-  const clearHistory = () => {
-    setHistory([]);
-    try {
-      window.localStorage.removeItem(HISTORY_KEY);
-    } catch {
-      // нечего чистить
+      // буфер недоступен — кнопка просто не даст подтверждения
     }
   };
 
@@ -168,195 +129,139 @@ export function TextTranslator() {
             : null;
 
   return (
-    <section>
-      <div className="overflow-hidden rounded-card bg-card shadow-card">
-        <div className="relative grid grid-cols-[1fr_auto_1fr] items-center border-b border-line">
-          <LangSelect value={src} onChange={setSrc} disabledValue={tgt} label={t.srcRole} ui={ui} />
-          <button
-            type="button"
-            onClick={swap}
-            title={t.swap}
-            aria-label={t.swap}
-            className="grid size-10 cursor-pointer place-items-center rounded-full text-muted hover:bg-brand-softer hover:text-brand-deep"
-          >
-            <SwapIcon />
-          </button>
-          <LangSelect value={tgt} onChange={setTgt} disabledValue={src} label={t.tgtRole} ui={ui} />
-        </div>
-
-        <div className="grid md:grid-cols-2">
-          {/* ввод */}
-          <div className="flex min-w-0 flex-col">
-            <div className="flex min-h-[170px] flex-1 flex-col px-[22px] pt-5 pb-3">
-              <label className="sr-only" htmlFor="source-text">
-                {t.srcRole}
-              </label>
-              <textarea
-                id="source-text"
-                ref={inputRef}
-                value={text}
-                onChange={(event) => setText(event.target.value)}
-                placeholder={t.placeholder}
-                spellCheck={false}
-                rows={3}
-                className="min-h-[96px] w-full flex-1 resize-none border-0 bg-transparent p-0 text-[21px] leading-[1.42] text-ink outline-none placeholder:text-faint"
-              />
-            </div>
-
-            {src === "tk" && (
-              <div className="flex flex-wrap items-center gap-[6px] px-[22px] pb-3">
-                <span className="mr-[3px] text-[12px] font-medium text-sand">{t.lettersCap}</span>
-                {TK_LETTERS.map((letter) => (
-                  <button
-                    key={letter}
-                    type="button"
-                    onClick={() => insertLetter(letter)}
-                    aria-label={letter}
-                    className="size-[30px] cursor-pointer rounded-lg bg-sand-soft text-[15px] font-medium text-ink hover:bg-sand hover:text-white"
-                  >
-                    {letter}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            <div className="flex min-h-[52px] items-center gap-2 py-3 pr-4 pl-[22px]">
-              <button
-                type="button"
-                onClick={() => speak(text, src)}
-                disabled={!text.trim()}
-                title={t.listen}
-                aria-label={t.listen}
-                className={iconButton}
-              >
-                <SpeakerIcon />
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setText("");
-                  inputRef.current?.focus();
-                }}
-                disabled={!text}
-                title={t.clear}
-                aria-label={t.clear}
-                className={iconButton}
-              >
-                <CrossIcon />
-              </button>
-              <span
-                className={`ml-auto text-[12.5px] tabular-nums ${
-                  text.length > TEXT_LIMIT ? "text-sand" : "text-faint"
-                }`}
-              >
-                {text.length} / {TEXT_LIMIT}
-              </span>
-            </div>
-          </div>
-
-          {/* результат */}
-          <div className="flex min-w-0 flex-col border-t border-line bg-card-2 md:border-t-0 md:border-l">
-            <div className="flex min-h-[170px] flex-1 flex-col px-[22px] pt-5 pb-3">
-              <output className="flex-1" aria-live="polite">
-                {result.status === "ok" ? (
-                  <span className="block min-h-[96px] text-[21px] leading-[1.42] break-words whitespace-pre-wrap text-ink">
-                    {result.text}
-                  </span>
-                ) : message ? (
-                  <span className="block min-h-[96px] text-[15px] leading-[1.5] text-muted">
-                    {message}
-                  </span>
-                ) : (
-                  <span className="block min-h-[96px] text-[21px] leading-[1.42] text-faint">
-                    {t.outEmpty}
-                  </span>
-                )}
-              </output>
-              {result.status === "ok" && result.translit && (
-                <p className="mt-3 text-[14px] text-muted">{result.translit}</p>
-              )}
-            </div>
-
-            <div className="flex min-h-[52px] items-center gap-2 py-3 pr-4 pl-[22px]">
-              <button
-                type="button"
-                onClick={() => result.status === "ok" && speak(result.text, tgt)}
-                disabled={result.status !== "ok"}
-                title={t.listen}
-                aria-label={t.listen}
-                className={iconButton}
-              >
-                <SpeakerIcon />
-              </button>
-              <button
-                type="button"
-                onClick={copy}
-                disabled={result.status !== "ok"}
-                title={t.copy}
-                aria-label={t.copy}
-                className={iconButton}
-              >
-                <CopyIcon />
-              </button>
-              {copied && <span className="text-[12.5px] text-brand-deep">{t.copied}</span>}
-            </div>
-          </div>
-        </div>
+    <section className="overflow-hidden rounded-card bg-card shadow-card">
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center border-b border-line">
+        <LangSelect value={src} onChange={setSrc} disabledValue={tgt} label={t.srcRole} ui={ui} />
+        <button
+          type="button"
+          onClick={swap}
+          title={t.swap}
+          aria-label={t.swap}
+          className="grid size-10 cursor-pointer place-items-center rounded-full text-muted hover:bg-brand-softer hover:text-brand-deep"
+        >
+          <SwapIcon />
+        </button>
+        <LangSelect value={tgt} onChange={setTgt} disabledValue={src} label={t.tgtRole} ui={ui} />
       </div>
 
-      {/* примеры */}
-      <div className="mt-[14px] flex flex-wrap items-center gap-[7px]">
-        <span className="mr-[3px] text-[13px] text-muted">{t.tryCap}</span>
-        {demoPhrases(src).map((phrase) => (
-          <button
-            key={phrase}
-            type="button"
-            onClick={() => {
-              setText(phrase);
-              inputRef.current?.focus();
-            }}
-            className="cursor-pointer rounded-2xl bg-card px-[13px] py-[7px] text-[13.5px] text-ink shadow-card hover:bg-brand-soft hover:text-brand-deep"
-          >
-            {phrase}
-          </button>
-        ))}
-      </div>
+      <div className="grid md:grid-cols-2">
+        {/* ввод */}
+        <div className="flex min-w-0 flex-col">
+          <div className="flex min-h-[170px] flex-1 flex-col px-[22px] pt-5 pb-3">
+            <label className="sr-only" htmlFor="source-text">
+              {t.srcRole}
+            </label>
+            <textarea
+              id="source-text"
+              ref={inputRef}
+              value={text}
+              onChange={(event) => setText(event.target.value)}
+              placeholder={t.placeholder}
+              spellCheck={false}
+              rows={3}
+              className="min-h-[96px] w-full flex-1 resize-none border-0 bg-transparent p-0 text-[21px] leading-[1.42] text-ink outline-none placeholder:text-faint"
+            />
+          </div>
 
-      {/* история */}
-      {history.length > 0 && (
-        <div className="mt-4 rounded-card bg-card p-[22px] shadow-card">
-          <div className="mb-3 flex items-baseline justify-between gap-4">
-            <h2 className="font-display text-[15px] font-bold tracking-[-0.015em] text-ink">
-              {t.historyTitle}
-            </h2>
+          {src === "tk" && (
+            <div className="flex flex-wrap items-center gap-[6px] px-[22px] pb-3">
+              <span className="mr-[3px] text-[12px] font-medium text-sand">{t.lettersCap}</span>
+              {TK_LETTERS.map((letter) => (
+                <button
+                  key={letter}
+                  type="button"
+                  onClick={() => insertLetter(letter)}
+                  aria-label={letter}
+                  className="size-[30px] cursor-pointer rounded-lg bg-sand-soft text-[15px] font-medium text-ink hover:bg-sand hover:text-white"
+                >
+                  {letter}
+                </button>
+              ))}
+            </div>
+          )}
+
+          <div className="flex min-h-[52px] items-center gap-2 py-3 pr-4 pl-[22px]">
             <button
               type="button"
-              onClick={clearHistory}
-              className="cursor-pointer text-[13px] text-muted hover:text-brand-deep"
+              onClick={() => speak(text, src)}
+              disabled={!text.trim()}
+              title={t.listen}
+              aria-label={t.listen}
+              className={iconButton}
             >
-              {t.historyClear}
+              <SpeakerIcon />
             </button>
+            <button
+              type="button"
+              onClick={() => {
+                setText("");
+                inputRef.current?.focus();
+              }}
+              disabled={!text}
+              title={t.clear}
+              aria-label={t.clear}
+              className={iconButton}
+            >
+              <CrossIcon />
+            </button>
+            <span
+              className={`ml-auto text-[12.5px] tabular-nums ${
+                text.length > TEXT_LIMIT ? "text-sand" : "text-faint"
+              }`}
+            >
+              {text.length} / {TEXT_LIMIT}
+            </span>
           </div>
-          <ul className="flex flex-col divide-y divide-line">
-            {history.map((item, index) => (
-              <li key={`${item.source}-${index}`} className="flex flex-col gap-[2px] py-[9px] first:pt-0 last:pb-0">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSrc(item.from);
-                    setTgt(item.to);
-                    setText(item.source);
-                  }}
-                  className="cursor-pointer text-left"
-                >
-                  <span className="text-[15px] text-ink">{item.source}</span>
-                  <span className="block text-[13.5px] text-muted">{item.target}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
         </div>
-      )}
+
+        {/* результат */}
+        <div className="flex min-w-0 flex-col border-t border-line bg-card-2 md:border-t-0 md:border-l">
+          <div className="flex min-h-[170px] flex-1 flex-col px-[22px] pt-5 pb-3">
+            <output className="flex-1" aria-live="polite">
+              {result.status === "ok" ? (
+                <span className="block min-h-[96px] text-[21px] leading-[1.42] break-words whitespace-pre-wrap text-ink">
+                  {result.text}
+                </span>
+              ) : message ? (
+                <span className="block min-h-[96px] text-[15px] leading-[1.5] text-muted">
+                  {message}
+                </span>
+              ) : (
+                <span className="block min-h-[96px] text-[21px] leading-[1.42] text-faint">
+                  {t.outEmpty}
+                </span>
+              )}
+            </output>
+            {result.status === "ok" && result.translit && (
+              <p className="mt-3 text-[14px] text-muted">{result.translit}</p>
+            )}
+          </div>
+
+          <div className="flex min-h-[52px] items-center gap-2 py-3 pr-4 pl-[22px]">
+            <button
+              type="button"
+              onClick={() => result.status === "ok" && speak(result.text, tgt)}
+              disabled={result.status !== "ok"}
+              title={t.listen}
+              aria-label={t.listen}
+              className={iconButton}
+            >
+              <SpeakerIcon />
+            </button>
+            <button
+              type="button"
+              onClick={copy}
+              disabled={result.status !== "ok"}
+              title={t.copy}
+              aria-label={t.copy}
+              className={iconButton}
+            >
+              <CopyIcon />
+            </button>
+            {copied && <span className="text-[12.5px] text-brand-deep">{t.copied}</span>}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

@@ -2,7 +2,6 @@
 
 import { TextTranslator } from "@/components/TextTranslator";
 import { useUi } from "./providers";
-import { LINKS } from "@/lib/paths";
 
 export default function TextPage() {
   const { t } = useUi();
@@ -10,30 +9,6 @@ export default function TextPage() {
   return (
     <>
       <TextTranslator />
-
-      <div className="mt-4 grid gap-4 md:grid-cols-2">
-        <div className="rounded-card bg-panel px-[22px] py-5">
-          <h2 className="mb-[7px] font-display text-[17px] font-bold tracking-[-0.015em] text-ink">
-            {t.pOffTitle}
-          </h2>
-          <p className="text-[14.5px] text-brand-deep">{t.pOffBody}</p>
-          <div className="mt-[14px] flex flex-wrap gap-[14px]">
-            <a className="text-[14px] font-semibold text-brand-deep no-underline hover:underline" href={LINKS.appStore}>
-              App Store
-            </a>
-            <a className="text-[14px] font-semibold text-brand-deep no-underline hover:underline" href={LINKS.googlePlay}>
-              Google Play
-            </a>
-          </div>
-        </div>
-
-        <div className="rounded-card bg-card px-[22px] py-5 shadow-card">
-          <h2 className="mb-[7px] font-display text-[17px] font-bold tracking-[-0.015em] text-ink">
-            {t.pMaketTitle}
-          </h2>
-          <p className="text-[14.5px] text-muted">{t.pMaketBody}</p>
-        </div>
-      </div>
 
       <section className="mt-13 grid items-center gap-9 md:grid-cols-[1fr_auto]">
         <div>

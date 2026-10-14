@@ -86,13 +86,6 @@ const DEMO: DemoRow[] = [
   },
 ];
 
-/** Примеры для кнопок «попробуйте» — на языке источника. */
-export function demoPhrases(from: Lang, count = 5): string[] {
-  return DEMO.map((row) => row[from])
-    .filter((value): value is string => Boolean(value))
-    .slice(0, count);
-}
-
 function normalize(value: string): string {
   return value.toLowerCase().replace(/[!?.,;:。！？]+\s*$/g, "").trim();
 }
