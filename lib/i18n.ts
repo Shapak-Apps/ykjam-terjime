@@ -67,8 +67,6 @@ export type Strings = {
   appP2: string;
   appP3: string;
 
-  heroTitle: string;
-  heroBody: string;
 
   notFoundTitle: string;
   notFoundBody: string;
@@ -140,9 +138,6 @@ export const STRINGS: Record<UiLang, Strings> = {
       "Ekrany görkezmek režimi: telefony beriň — söhbetdeşiňiz jümläni okap, jogaby basýar, siz ony türkmençe görýärsiňiz.",
     appP3: "Türkmen dili hytaý, iňlis ýa-da rus dilleri bilen jübütde. Interfeýs bäş dilde.",
 
-    heroTitle: "Türkmen dili üçin terjimeçi",
-    heroBody:
-      "Häzir bäş dil elýeterli: türkmen, rus, iňlis, hytaý we türk. Klawiaturada ä, ç, ž, ň, ö, ş, ü, ý harplary ýok bolsa — olar ýazgy meýdanynyň aşagynda.",
     notFoundTitle: "Sahypa tapylmady",
     notFoundBody:
       "Bu salgy boýunça sahypa ýok. Belki salgyda ýalňyşlyk bar ýa-da sahypa göçürildi.",
@@ -212,9 +207,6 @@ export const STRINGS: Record<UiLang, Strings> = {
       "Режим «покажи экран»: отдайте телефон — собеседник читает фразу и нажимает ответ, вы видите его по-туркменски.",
     appP3: "Туркменский в паре с китайским, английским или русским. Интерфейс на пяти языках.",
 
-    heroTitle: "Переводчик для туркменского языка",
-    heroBody:
-      "Сейчас доступно пять языков: туркменский, русский, английский, китайский и турецкий. Если на клавиатуре нет ä, ç, ž, ň, ö, ş, ü, ý — они под полем ввода.",
     notFoundTitle: "Страница не найдена",
     notFoundBody:
       "По этому адресу страницы нет. Возможно, в адресе опечатка или страница переехала.",
@@ -284,9 +276,6 @@ export const STRINGS: Record<UiLang, Strings> = {
       "Show-the-screen mode: hand over the phone — the other person reads the sentence and taps an answer, you see it in Turkmen.",
     appP3: "Turkmen paired with Chinese, English or Russian. Interface in five languages.",
 
-    heroTitle: "A translator for the Turkmen language",
-    heroBody:
-      "Five languages are available today: Turkmen, Russian, English, Chinese and Turkish. If your keyboard has no ä, ç, ž, ň, ö, ş, ü, ý — they sit under the input field.",
     notFoundTitle: "Page not found",
     notFoundBody:
       "There is no page at this address. The link may have a typo, or the page has moved.",
