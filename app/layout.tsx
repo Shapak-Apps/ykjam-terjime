@@ -54,13 +54,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SkipLink />
           <div className="mx-auto grid max-w-[1420px] md:grid-cols-[236px_minmax(0,1fr)]">
             <Sidebar />
-            <main
-              id="content"
-              className="min-w-0 px-4 pt-4 pb-11 md:px-[30px] md:pt-[22px] md:pb-14"
-            >
-              {children}
+            {/*
+              Колонка содержимого тянется на всю высоту экрана, а подвал
+              прижат к её низу: иначе на короткой странице он повисает
+              посередине, как это было на главной.
+            */}
+            <div className="flex min-w-0 flex-col md:min-h-screen">
+              <main id="content" className="flex-1 px-4 pt-4 pb-10 md:px-[30px] md:pt-[22px]">
+                {children}
+              </main>
               <Footer />
-            </main>
+            </div>
           </div>
         </UiProvider>
       </body>

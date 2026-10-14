@@ -9,7 +9,7 @@ export function Footer() {
   const { t } = useUi();
 
   return (
-    <footer className="mt-14 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-line pt-[26px] md:grid-cols-4">
+    <footer className="mt-auto grid grid-cols-2 gap-x-6 gap-y-3 border-t border-line px-4 pt-[26px] pb-10 md:grid-cols-4 md:px-[30px]">
       <div className="flex flex-col gap-[9px]">
         <a className={cell} href={LINKS.siteRepo}>
           {t.footSite}

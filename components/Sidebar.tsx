@@ -8,6 +8,15 @@ import { asset, LINKS } from "@/lib/paths";
 
 const iconClass = "size-[19px] shrink-0";
 
+function HomeIcon() {
+  return (
+    <svg className={iconClass} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 10.5L12 4l8 6.5V19a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19z" />
+      <path d="M9.5 20.5v-6h5v6" />
+    </svg>
+  );
+}
+
 function TextIcon() {
   return (
     <svg className={iconClass} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -62,7 +71,8 @@ export function Sidebar() {
   const pathname = usePathname();
 
   const items = [
-    { href: "/", label: t.navText, icon: <TextIcon /> },
+    { href: "/", label: t.navHome, icon: <HomeIcon /> },
+    { href: "/tekst/", label: t.navText, icon: <TextIcon /> },
     { href: "/ses/", label: t.navVoice, icon: <VoiceIcon /> },
     { href: "/surat/", label: t.navPhoto, icon: <PhotoIcon /> },
     { href: "/programma/", label: t.navApp, icon: <AppIcon /> },
@@ -75,7 +85,7 @@ export function Sidebar() {
 
   return (
     <aside className="flex flex-col px-4 pt-[22px] pb-7 md:sticky md:top-0 md:h-screen">
-      <Link href="/" className="flex items-center gap-[9px] px-[10px] pb-1 no-underline">
+      <Link href="/" className="mb-5 flex items-center gap-[9px] px-[10px] pb-1 no-underline">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={asset("/icon.png")}
@@ -88,10 +98,6 @@ export function Sidebar() {
           Ykjam Terjime
         </span>
       </Link>
-
-      <span className="mt-2 mb-5 ml-[10px] self-start rounded-[5px] bg-sand-soft px-[7px] py-[3px] text-[10px] font-semibold tracking-[0.12em] text-sand uppercase">
-        {t.maket}
-      </span>
 
       <nav className="flex gap-[6px] overflow-x-auto pb-1 md:flex-col md:gap-[2px] md:overflow-visible md:pb-0">
         {items.map((item) => {

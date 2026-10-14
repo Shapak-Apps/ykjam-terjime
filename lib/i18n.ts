@@ -15,13 +15,24 @@ export const LANG_NAMES: Record<Lang, Record<UiLang, string>> = {
 };
 
 export type Strings = {
-  maket: string;
-
+  navHome: string;
   navText: string;
   navVoice: string;
   navPhoto: string;
   navApp: string;
   navProject: string;
+
+  homeTitle: string;
+  homeLead: string;
+  svcOpen: string;
+  svcTextTitle: string;
+  svcTextBody: string;
+  svcVoiceTitle: string;
+  svcVoiceBody: string;
+  svcPhotoTitle: string;
+  svcPhotoBody: string;
+  svcAppTitle: string;
+  svcAppBody: string;
 
   srcRole: string;
   tgtRole: string;
@@ -38,7 +49,6 @@ export type Strings = {
   stateTooLong: string;
   stateOffline: string;
   stateError: string;
-
 
   voiceTitle: string;
   voiceLead: string;
@@ -67,7 +77,6 @@ export type Strings = {
   appP2: string;
   appP3: string;
 
-
   notFoundTitle: string;
   notFoundBody: string;
   notFoundHome: string;
@@ -81,13 +90,29 @@ export type Strings = {
 
 export const STRINGS: Record<UiLang, Strings> = {
   tk: {
-    maket: "maket",
-
+    navHome: "Baş sahypa",
     navText: "Tekst",
     navVoice: "Ses",
     navPhoto: "Surat",
     navApp: "Programma",
     navProject: "Taslama",
+
+    homeTitle: "Türkmen dili üçin terjime hyzmatlary",
+    homeLead:
+      "Ykjam Terjime türkmen dilinden we türkmen diline terjime edýär: ýazylan tekst, aýdylan söz we suratdaky ýazgy. Häzir bäş dil: türkmen, rus, iňlis, hytaý we türk.",
+    svcOpen: "Açmak",
+    svcTextTitle: "Tekst terjimesi",
+    svcTextBody:
+      "Teksti ýazyň ýa-da goýuň. Klawiaturada ä, ç, ž, ň, ö, ş, ü, ý harplary ýok bolsa, olar ýazgy meýdanynyň aşagynda. Hytaý dili üçin transkripsiýa görkezilýär.",
+    svcVoiceTitle: "Ses terjimesi",
+    svcVoiceBody:
+      "Gürläň — ýazgy alynýar we terjime edilýär. Söhbetdeşiňiz bilen telefonyň üsti bilen gepleşmek üçin.",
+    svcPhotoTitle: "Suratdan terjime",
+    svcPhotoBody:
+      "Menýu, bellik, resminama: suraty ýükläň ýa-da surata düşüriň — ýazgy tanalýar we terjime edilýär.",
+    svcAppTitle: "Telefondaky programma",
+    svcAppBody:
+      "Gepleşik kitaby internetsiz işleýär: serhetde, dermanhanada we aragatnaşyk ýok ýerde. App Store we Google Play-de.",
 
     srcRole: "Çeşme dili",
     tgtRole: "Niýetlenen dili",
@@ -101,11 +126,10 @@ export const STRINGS: Record<UiLang, Strings> = {
     swap: "Dilleri çalyş",
 
     stateNotReady:
-      "Bu sözlem entek maketde ýok. Terjime hyzmaty birikdirilenden soň islendik tekst terjime ediler.",
+      "Bu sözlem entek elýeterli däl. Terjime hyzmaty birikdirilenden soň islendik tekst terjime ediler.",
     stateTooLong: "Tekst gaty uzyn. Iň köp 5000 simwol.",
     stateOffline: "Internet baglanyşygy ýok. Baglanyşygy barlap gaýtadan synanyşyň.",
     stateError: "Terjime şowsuz boldy. Gaýtadan synanyşyň.",
-
 
     voiceTitle: "Ses terjimesi",
     voiceLead:
@@ -143,6 +167,7 @@ export const STRINGS: Record<UiLang, Strings> = {
       "Bu salgy boýunça sahypa ýok. Belki salgyda ýalňyşlyk bar ýa-da sahypa göçürildi.",
     notFoundHome: "Baş sahypa",
     skipLink: "Esasy mazmuna geç",
+
     footSite: "Sahypanyň kody",
     footApp: "Programmanyň kody",
     footPrivacy: "Gizlinlik syýasaty",
@@ -150,13 +175,29 @@ export const STRINGS: Record<UiLang, Strings> = {
   },
 
   ru: {
-    maket: "макет",
-
+    navHome: "Главная",
     navText: "Текст",
     navVoice: "Голос",
     navPhoto: "Фото",
     navApp: "Приложение",
     navProject: "Проект",
+
+    homeTitle: "Услуги перевода для туркменского языка",
+    homeLead:
+      "Ykjam Terjime переводит с туркменского и на туркменский: набранный текст, сказанное вслух и надпись на фотографии. Сейчас пять языков: туркменский, русский, английский, китайский и турецкий.",
+    svcOpen: "Открыть",
+    svcTextTitle: "Перевод текста",
+    svcTextBody:
+      "Наберите или вставьте текст. Если на клавиатуре нет ä, ç, ž, ň, ö, ş, ü, ý — они под полем ввода. Для китайского показывается транскрипция.",
+    svcVoiceTitle: "Голосовой перевод",
+    svcVoiceBody:
+      "Говорите — запись распознаётся и переводится. Для разговора с собеседником через телефон.",
+    svcPhotoTitle: "Перевод с фото",
+    svcPhotoBody:
+      "Меню, вывеска, документ: загрузите снимок или сфотографируйте — текст распознаётся и переводится.",
+    svcAppTitle: "Приложение на телефоне",
+    svcAppBody:
+      "Разговорник работает без интернета: на границе, в аптеке и там, где нет связи. В App Store и Google Play.",
 
     srcRole: "Язык оригинала",
     tgtRole: "Язык перевода",
@@ -170,11 +211,10 @@ export const STRINGS: Record<UiLang, Strings> = {
     swap: "Поменять языки",
 
     stateNotReady:
-      "Этой фразы в макете пока нет. Когда движок будет подключён, переводиться будет любой текст.",
+      "Эта фраза пока недоступна. Когда служба перевода будет подключена, переводиться будет любой текст.",
     stateTooLong: "Текст слишком длинный. Максимум 5000 символов.",
     stateOffline: "Нет соединения. Проверьте интернет и попробуйте снова.",
     stateError: "Перевод не удался. Попробуйте ещё раз.",
-
 
     voiceTitle: "Голосовой перевод",
     voiceLead:
@@ -212,6 +252,7 @@ export const STRINGS: Record<UiLang, Strings> = {
       "По этому адресу страницы нет. Возможно, в адресе опечатка или страница переехала.",
     notFoundHome: "На главную",
     skipLink: "Перейти к содержимому",
+
     footSite: "Код сайта",
     footApp: "Код приложения",
     footPrivacy: "Политика приватности",
@@ -219,13 +260,29 @@ export const STRINGS: Record<UiLang, Strings> = {
   },
 
   en: {
-    maket: "mockup",
-
+    navHome: "Home",
     navText: "Text",
     navVoice: "Voice",
     navPhoto: "Photo",
     navApp: "App",
     navProject: "Project",
+
+    homeTitle: "Translation services for the Turkmen language",
+    homeLead:
+      "Ykjam Terjime translates from Turkmen and into Turkmen: typed text, spoken words and writing in a photo. Five languages today: Turkmen, Russian, English, Chinese and Turkish.",
+    svcOpen: "Open",
+    svcTextTitle: "Text translation",
+    svcTextBody:
+      "Type or paste the text. If your keyboard has no ä, ç, ž, ň, ö, ş, ü, ý, they sit under the input field. Chinese comes with a transcription.",
+    svcVoiceTitle: "Voice translation",
+    svcVoiceBody:
+      "Speak — the recording is recognised and translated. For talking to someone through the phone.",
+    svcPhotoTitle: "Translation from a photo",
+    svcPhotoBody:
+      "A menu, a sign, a document: upload a picture or take one — the writing is recognised and translated.",
+    svcAppTitle: "The app on your phone",
+    svcAppBody:
+      "The phrasebook works without internet: at the border, at the pharmacy, anywhere without a signal. On the App Store and Google Play.",
 
     srcRole: "Source language",
     tgtRole: "Target language",
@@ -239,11 +296,10 @@ export const STRINGS: Record<UiLang, Strings> = {
     swap: "Swap languages",
 
     stateNotReady:
-      "This phrase is not in the mockup yet. Once the engine is connected, any text will translate.",
+      "This phrase is not available yet. Once the translation service is connected, any text will translate.",
     stateTooLong: "Text is too long. 5000 characters maximum.",
     stateOffline: "No connection. Check the network and try again.",
     stateError: "Translation failed. Try again.",
-
 
     voiceTitle: "Voice translation",
     voiceLead:
@@ -281,6 +337,7 @@ export const STRINGS: Record<UiLang, Strings> = {
       "There is no page at this address. The link may have a typo, or the page has moved.",
     notFoundHome: "Go to the start page",
     skipLink: "Skip to content",
+
     footSite: "Website source",
     footApp: "App source",
     footPrivacy: "Privacy policy",

@@ -9,7 +9,7 @@ export const dynamic = "force-static";
  * но в день запуска менять её не придётся — только снять запрет.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ["", "/ses/", "/surat/", "/programma/"];
+  const pages = ["", "/tekst/", "/ses/", "/surat/", "/programma/"];
 
   return pages.map((path) => ({
     url: `${SITE_URL}${path || "/"}`,
